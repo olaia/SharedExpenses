@@ -16,7 +16,6 @@ public class PersonController {
     @Autowired
     PersonService personService;
 
-
     @PostMapping("/store")
     public ResponseEntity addFriend(@RequestBody Person friend) {
 //        if (!isPersonValid(friend)) {
@@ -26,7 +25,7 @@ public class PersonController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/listFriends")
+    @GetMapping("/listAll")
     public ResponseEntity listFriends(){
         Optional<List<Person>> friends = personService.findAll();
         return friends.isPresent()
