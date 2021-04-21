@@ -22,7 +22,7 @@ public class ExpenseController {
     public ResponseEntity getExpenses() {
         Optional<List<Expense>> expenses = expenseService.findAll();
         return expenses.isPresent()
-                ? ResponseEntity.ok(expenses.get())
+                ? ResponseEntity.ok(expenses)
                 : ResponseEntity.notFound().build();
     }
 }
