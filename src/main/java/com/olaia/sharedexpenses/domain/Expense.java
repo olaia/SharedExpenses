@@ -5,18 +5,30 @@ import java.time.Instant;
 
 public class Expense {
     private Person payer;
-    private BigDecimal balance;
+    private BigDecimal amount;
     private Instant date;
 
-    public Expense(Person payer, BigDecimal balance, Instant date) {
+    public Expense(Person payer, BigDecimal amount, Instant date) {
         this.payer = payer;
-        this.balance = balance;
+        this.amount = amount;
         this.date = date;
+    }
+
+    public Person getPayer() {
+        return payer;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public Instant getDate() {
+        return date;
     }
 
     public static class Builder {
         private Person payer;
-        private BigDecimal balance;
+        private BigDecimal amount;
         private Instant date;
 
         public Builder(){}
@@ -26,8 +38,8 @@ public class Expense {
             return this;
         }
 
-        public Builder withBalance(BigDecimal balance){
-            this.balance = balance;
+        public Builder withAmount(BigDecimal amount){
+            this.amount = amount;
             return this;
         }
 
@@ -37,7 +49,7 @@ public class Expense {
         }
 
         public Expense build(){
-            return new Expense(payer, balance, date);
+            return new Expense(payer, amount, date);
         }
     }
 }

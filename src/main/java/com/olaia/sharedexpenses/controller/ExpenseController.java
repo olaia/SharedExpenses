@@ -2,6 +2,7 @@ package com.olaia.sharedexpenses.controller;
 
 import com.olaia.sharedexpenses.domain.Expense;
 import com.olaia.sharedexpenses.service.ExpenseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,16 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/gastos")
+@RequestMapping("/expenses")
 public class ExpenseController {
 
-    private final ExpenseService expenseService;
+    @Autowired
+    ExpenseService expenseService;
 
-    public ExpenseController(ExpenseService expenseService) {
-        this.expenseService = expenseService;
-    }
-
-    @GetMapping("/listar")
+    @GetMapping("/getAll")
     public ResponseEntity getExpenses() {
         Optional<List<Expense>> expenses = expenseService.findAll();
         return expenses.isPresent()
