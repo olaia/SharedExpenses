@@ -1,9 +1,36 @@
 package com.olaia.sharedexpenses.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.olaia.sharedexpenses.domain.Person;
+import com.olaia.sharedexpenses.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/amigos")
+@RequestMapping("/friends")
 public class PersonController {
+
+    @Autowired
+    PersonService personService;
+
+
+    @PostMapping("/store")
+    public ResponseEntity addFriend(@RequestBody Person friend) {
+//        if (!isPersonValid(friend)) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+        personService.addFriend(friend);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/listFriends")
+    public ResponseEntity listFriends(){
+        Optional<List<Person>> friends = personService.findAll();
+        return friends.isPresent()
+                ? ResponseEntity.ok(friends)
+                : ResponseEntity.notFound().build();
+    }
 }
