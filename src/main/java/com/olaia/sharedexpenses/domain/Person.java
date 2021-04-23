@@ -1,9 +1,9 @@
 package com.olaia.sharedexpenses.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.StringJoiner;
 
 @Entity
 public class Person {
@@ -13,6 +13,10 @@ public class Person {
     private String name;
     private String lastname;
     private BigDecimal balance;
+
+    public Person() {
+        this.balance = BigDecimal.ZERO;
+    }
 
     public Person(String username, String name, String lastname) {
         this.username = username;
@@ -31,6 +35,22 @@ public class Person {
 
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     @Override
