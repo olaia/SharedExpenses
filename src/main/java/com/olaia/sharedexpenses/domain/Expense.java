@@ -1,9 +1,17 @@
 package com.olaia.sharedexpenses.domain;
 
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.Instant;
 
+@Entity
 public class Expense {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name="payer_id")
     private Person payer;
     private BigDecimal amount;
     private Instant date;

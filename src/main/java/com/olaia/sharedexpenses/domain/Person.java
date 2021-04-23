@@ -1,10 +1,19 @@
 package com.olaia.sharedexpenses.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.StringJoiner;
 
+@Entity
 public class Person {
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
     private String name;
     private String lastname;
     private BigDecimal balance;
