@@ -12,8 +12,8 @@ public class Friends {
     }
 
     public void addFriend(Person person){
-        if (!isFriend(person.getFullName()))
-            group.put(person.getFullName(), person);
+        if (!isFriend(person.getUsername()))
+            group.put(person.getUsername(), person);
     }
 
     public List<Person> getList(){

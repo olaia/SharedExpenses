@@ -1,9 +1,6 @@
 package com.olaia.sharedexpenses.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -11,21 +8,21 @@ import java.util.StringJoiner;
 @Entity
 public class Person {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
+    private String username;
 
     private String name;
     private String lastname;
     private BigDecimal balance;
 
-    public Person(String name, String lastname) {
+    public Person(String username, String name, String lastname) {
+        this.username = username;
         this.name = name;
         this.lastname = lastname;
         this.balance = BigDecimal.ZERO;
     }
 
-    public String getFullName() {
-        return new StringJoiner(" ").add(name).add(lastname).toString();
+    public String getUsername() {
+        return username;
     }
 
     public BigDecimal getBalance() {
@@ -50,19 +47,16 @@ public class Person {
     }
 
     public static class Builder{
+        private String username;
         private String name;
         private String lastname;
-        private BigDecimal balance;
-
-        public BigDecimal getBalance() {
-            return balance;
-        }
-
-        public void setBalance(BigDecimal balance) {
-            this.balance = balance;
-        }
 
         public Builder(){}
+
+        public Person.Builder withUsername(String username){
+            this.username = username;
+            return this;
+        }
 
         public Person.Builder withName(String name){
             this.name = name;
@@ -75,7 +69,7 @@ public class Person {
         }
 
         public Person build(){
-            return new Person(name, lastname);
+            return new Person(username, name, lastname);
         }
     }
 }

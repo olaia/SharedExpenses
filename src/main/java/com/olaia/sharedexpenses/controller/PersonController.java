@@ -18,20 +18,9 @@ public class PersonController {
 
     @PostMapping("/addFriend")
     public ResponseEntity addFriend(@RequestBody Person friend) {
-//        if (!isPersonValid(friend)) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
         personService.addFriend(friend);
         return ResponseEntity.ok().build();
     }
-
-//    @GetMapping("/listAll")
-//    public ResponseEntity listFriends(){
-//        Optional<List<Person>> friends = personService.findAll();
-//        return friends.isPresent()
-//                ? ResponseEntity.ok(friends)
-//                : ResponseEntity.notFound().build();
-//    }
 
     @GetMapping("/getBalance")
     public ResponseEntity getBalance(){
