@@ -2,6 +2,7 @@ package com.olaia.sharedexpenses.domain;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Person {
     private String name;
@@ -14,12 +15,8 @@ public class Person {
         this.balance = BigDecimal.ZERO;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getLastname() {
-        return lastname;
+    public String getFullName() {
+        return new StringJoiner(" ").add(name).add(lastname).toString();
     }
 
     public BigDecimal getBalance() {

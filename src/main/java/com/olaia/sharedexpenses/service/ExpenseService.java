@@ -1,11 +1,12 @@
 package com.olaia.sharedexpenses.service;
 
 import com.olaia.sharedexpenses.domain.Expense;
+import com.olaia.sharedexpenses.domain.dto.ExpenseDTO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ExpenseService {
-    void addExpense(Expense expense);
-    Optional<List<Expense>> findAll();
+    void addExpense(ExpenseDTO expense);
+    Optional<List<ExpenseDTO>> findAll();
 }

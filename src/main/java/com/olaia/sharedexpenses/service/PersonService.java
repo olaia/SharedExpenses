@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface PersonService {
     void addFriend(Person person);
-    void addPayment(Person person, BigDecimal amount);
+    void addPayment(String personName, BigDecimal amount);
     Optional<List<Person>> getBalance();
+    boolean isFriend(String fullName);
 }
