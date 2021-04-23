@@ -1,12 +1,11 @@
 package com.olaia.sharedexpenses.controller;
 
 import com.olaia.sharedexpenses.domain.Expense;
+import com.olaia.sharedexpenses.domain.Person;
 import com.olaia.sharedexpenses.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,5 +23,11 @@ public class ExpenseController {
         return expenses.isPresent()
                 ? ResponseEntity.ok(expenses)
                 : ResponseEntity.notFound().build();
+    }
+
+    @PostMapping("/addExpense")
+    public ResponseEntity addExpense(@RequestBody Expense expense) {
+        expenseService.addExpense(expense);
+        return ResponseEntity.ok().build();
     }
 }
