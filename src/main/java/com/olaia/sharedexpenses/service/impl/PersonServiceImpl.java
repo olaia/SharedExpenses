@@ -1,8 +1,11 @@
 package com.olaia.sharedexpenses.service.impl;
 
+import com.olaia.sharedexpenses.Application;
 import com.olaia.sharedexpenses.dao.PersonRepository;
 import com.olaia.sharedexpenses.domain.Person;
 import com.olaia.sharedexpenses.service.PersonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,8 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
 
+    static final Logger log = LoggerFactory.getLogger(Application.class);
+
     @Override
     public void addFriend(Person person) {
         personRepository.save(person);
@@ -25,10 +30,10 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public void addPayment(String username, BigDecimal amount) {
         Optional<List<Person>> balance = getBalance();
-        System.out.format("payer:%s - %.2f between %d\n",username, amount, balance.map(List::size).orElse(0));
+        log.info(String.format("payer:%s - %.2f between %d",username, amount, balance.map(List::size).orElse(0)));
         balance.ifPresent(list -> list.stream()
                 .forEach(person -> {
-                    System.out.format("BEFORE %s: %.2f\t\t",person.getUsername(), person.getBalance());
+                    log.info(String.format("BEFORE \t%s: %.2f",person.getUsername(), person.getBalance()));
                     BigDecimal needToPay = amount.divide(BigDecimal.valueOf(list.size()), RoundingMode.HALF_UP);
                     if (person.getUsername().equals(username)){
                         needToPay = needToPay.subtract(amount);
@@ -37,9 +42,8 @@ public class PersonServiceImpl implements PersonService {
                             person.getBalance()
                                     .add(needToPay));
                     personRepository.save(person);
-                    System.out.format("AFTER %s: %.2f\n",person.getUsername(), person.getBalance());
+                    log.info(String.format("AFTER \t%s: %.2f",person.getUsername(), person.getBalance()));
                 }));
-        System.out.println("\n");
     }
 
     @Override
