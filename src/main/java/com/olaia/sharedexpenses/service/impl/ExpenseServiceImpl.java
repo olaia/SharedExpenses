@@ -1,7 +1,6 @@
 package com.olaia.sharedexpenses.service.impl;
 
 import com.olaia.sharedexpenses.dao.ExpenseRepository;
-import com.olaia.sharedexpenses.dao.PersonRepository;
 import com.olaia.sharedexpenses.domain.Expense;
 import com.olaia.sharedexpenses.domain.Person;
 import com.olaia.sharedexpenses.domain.dto.ExpenseDTO;
@@ -11,8 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,7 +28,8 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Optional<List<ExpenseDTO>> findAll() {
-        List<Expense> expenses = expenseRepository.findAll();
+//        expenseRepository.findAllByOrderByDate();
+        List<Expense> expenses = expenseRepository.findAllByOrderByDateDesc();
         return Optional.ofNullable(expenses.stream().map(this::convertToDTO).collect(Collectors.toList()));
     }
 

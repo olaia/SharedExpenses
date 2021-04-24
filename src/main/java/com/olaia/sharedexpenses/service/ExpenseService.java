@@ -1,6 +1,5 @@
 package com.olaia.sharedexpenses.service;
 
-import com.olaia.sharedexpenses.domain.Expense;
 import com.olaia.sharedexpenses.domain.dto.ExpenseDTO;
 
 import java.util.List;
