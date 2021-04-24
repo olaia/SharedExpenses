@@ -8,14 +8,16 @@ public class ExpenseDTO {
     private String username;
     private BigDecimal amount;
     private Instant date;
+    private String description;
 
     public ExpenseDTO() {
     }
 
-    public ExpenseDTO(String username, BigDecimal amount, Instant date) {
+    public ExpenseDTO(String username, BigDecimal amount, Instant date, String description) {
         this.username = username;
         this.amount = amount;
         this.date = date;
+        this.description = description;
     }
 
     public String getUsername() {
@@ -40,5 +42,13 @@ public class ExpenseDTO {
 
     public void setDate(Instant date) {
         this.date = date;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
