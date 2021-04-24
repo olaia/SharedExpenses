@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ExpenseService {
-    void addExpense(ExpenseDTO expense);
+    void addExpense(ExpenseDTO expenseDTO);
     Optional<List<ExpenseDTO>> findAll();
 }

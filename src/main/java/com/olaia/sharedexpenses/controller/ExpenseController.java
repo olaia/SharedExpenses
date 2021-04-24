@@ -1,7 +1,6 @@
 package com.olaia.sharedexpenses.controller;
 
 import com.olaia.sharedexpenses.domain.Expense;
-import com.olaia.sharedexpenses.domain.Person;
 import com.olaia.sharedexpenses.domain.dto.ExpenseDTO;
 import com.olaia.sharedexpenses.service.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,8 @@ public class ExpenseController {
     }
 
     @PostMapping("/addExpense")
-    public ResponseEntity addExpense(@RequestBody ExpenseDTO expense) {
-        expenseService.addExpense(expense);
+    public ResponseEntity addExpense(@RequestBody ExpenseDTO expenseDTO) {
+        expenseService.addExpense(expenseDTO);
         return ResponseEntity.ok().build();
     }
 }

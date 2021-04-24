@@ -16,6 +16,8 @@ public class Expense {
     private BigDecimal amount;
     private Instant date;
 
+    public Expense(){}
+
     public Expense(Person payer, BigDecimal amount, Instant date) {
         this.payer = payer;
         this.amount = amount;
@@ -32,6 +34,18 @@ public class Expense {
 
     public Instant getDate() {
         return date;
+    }
+
+    public void setPayer(Person payer){
+        this.payer = payer;
+    }
+
+    public void setAmount(BigDecimal amount){
+        this.amount = amount;
+    }
+
+    public void setDate(Instant date){
+        this.date = date;
     }
 
     public static class Builder {

@@ -11,4 +11,5 @@ public interface PersonService {
     void addPayment(String personName, BigDecimal amount);
     Optional<List<Person>> getBalance();
     boolean isFriend(String fullName);
+    Optional<Person> findByUsername(String username);
 }
