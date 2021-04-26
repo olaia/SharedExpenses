@@ -1,19 +1,18 @@
 package com.olaia.sharedexpenses.domain.dto;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 
 public class ExpenseDTO {
 
     private String username;
     private BigDecimal amount;
-    private Instant date;
+    private long date;
     private String description;
 
     public ExpenseDTO() {
     }
 
-    public ExpenseDTO(String username, BigDecimal amount, Instant date, String description) {
+    public ExpenseDTO(String username, BigDecimal amount, long date, String description) {
         this.username = username;
         this.amount = amount;
         this.date = date;
@@ -28,7 +27,7 @@ public class ExpenseDTO {
         return amount;
     }
 
-    public Instant getDate() {
+    public long getDate() {
         return date;
     }
 
@@ -40,8 +39,8 @@ public class ExpenseDTO {
         this.amount = amount;
     }
 
-    public void setDate(Instant date) {
-        this.date = date;
+    public void setDate(long dateEpoch) {
+        this.date = dateEpoch;
     }
 
     public String getDescription() {

@@ -6,10 +6,13 @@ import com.olaia.sharedexpenses.domain.User;
 import com.olaia.sharedexpenses.domain.dto.ExpenseDTO;
 import com.olaia.sharedexpenses.service.ExpenseService;
 import com.olaia.sharedexpenses.service.UserService;
+import org.modelmapper.AbstractConverter;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,7 +31,6 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     @Override
     public Optional<List<ExpenseDTO>> findAll() {
-//        expenseRepository.findAllByOrderByDate();
         List<Expense> expenses = expenseRepository.findAllByOrderByDateDesc();
         return Optional.ofNullable(expenses.stream().map(this::convertToDTO).collect(Collectors.toList()));
     }
@@ -42,14 +44,28 @@ public class ExpenseServiceImpl implements ExpenseService {
         userService.addPayment(expense.getPayer().getUsername(), expense.getAmount());
     }
 
+    Converter<Long, Instant> toInstant = new AbstractConverter<>() {
+      protected Instant convert(Long source) {
+        return Instant.ofEpochMilli(source);
+      }
+    };
+    Converter<Instant, Long> toEpoch = new AbstractConverter<>() {
+      protected Long convert(Instant source) {
+        return source == null ? null : source.getEpochSecond();
+      }
+    };
+
     private ExpenseDTO convertToDTO(Expense expense) {
+        modelMapper.addConverter(toEpoch);
         ExpenseDTO expenseDTO = modelMapper.map(expense, ExpenseDTO.class);
         expenseDTO.setUsername(expense.getPayer().getUsername());
         return expenseDTO;
     }
 
     private Expense convertToEntity(ExpenseDTO expenseDTO) {
+        modelMapper.addConverter(toInstant);
         Expense expense = modelMapper.map(expenseDTO, Expense.class);
+//        expense.setDate(Instant.ofEpochSecond(expenseDTO.getDate()));
         expense.setPayer(new User.Builder().withUsername(expenseDTO.getUsername()).build());
         return expense;
     }
