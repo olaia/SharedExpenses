@@ -12,21 +12,21 @@ public class Expense {
 
     @ManyToOne
     @JoinColumn(name="payer_id")
-    private Person payer;
+    private User payer;
     private BigDecimal amount;
     private Instant date;
     private String description;
 
     public Expense(){}
 
-    public Expense(Person payer, BigDecimal amount, Instant date, String description) {
+    public Expense(User payer, BigDecimal amount, Instant date, String description) {
         this.payer = payer;
         this.amount = amount;
         this.date = date;
         this.description = description;
     }
 
-    public Person getPayer() {
+    public User getPayer() {
         return payer;
     }
 
@@ -38,7 +38,7 @@ public class Expense {
         return date;
     }
 
-    public void setPayer(Person payer){
+    public void setPayer(User payer){
         this.payer = payer;
     }
 
@@ -59,14 +59,14 @@ public class Expense {
     }
 
     public static class Builder {
-        private Person payer;
+        private User payer;
         private BigDecimal amount = BigDecimal.ZERO;
         private Instant date;
         private String description;
 
         public Builder(){}
 
-        public Builder withPayer(Person payer){
+        public Builder withPayer(User payer){
             this.payer = payer;
             return this;
         }
