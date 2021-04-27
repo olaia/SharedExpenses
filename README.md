@@ -1,11 +1,14 @@
 # Shared Expenses
 
-Shared Expenses is a backend application created with Spring Boot. 
+<em>This README in other languages: [English](README.md), [Español](README.es.md).</em>
 
-It provides support for group of friends that want to share expenses and keep track of what each one owes to/from the group.
-Data is stored in MySQL database.
+Shared Expenses is a backend application created with Spring Boot.
 
 Dependencies have been managed with Gradle.
+
+Shared Expenses is an application that provides support for group of friends that want to share expenses and keep track of what each one owes to/from the group.
+Data is stored in MySQL database.
+
 
 # Features
 1. Add User
@@ -67,6 +70,6 @@ mysql --user=springuser --password=ThePassword -h localhost shared_expenses < sh
 1. Back and front exchange times in EPOCH format. Database stores user readable string.
 
 ## Nice to have
-1. Tests. To ensure correct back behaviour.
+1. Tests. To ensure correct back behaviour and proyect scalability.
 2. Docker containers allowing a developer to package up an application with all the needed parts, such as libraries and other dependencies, and ship it all out as one package.
 3. Nominal expense. App would tell each person how much to pay and to whom in order to keep the group balance to 0€.
