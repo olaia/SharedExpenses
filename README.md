@@ -46,7 +46,7 @@ Source code compilation.
 ```
 Compilation and execution
 ```
-./gradlew bootJar
+./gradlew bootRun
 ```
 
 ## Data Persistance
