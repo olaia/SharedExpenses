@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isFriend(String username) {
+    public boolean userExists(String username) {
         return userRepository.existsById(username);
     }
 

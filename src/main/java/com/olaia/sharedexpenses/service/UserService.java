@@ -10,6 +10,6 @@ public interface UserService {
     void addUser(User user);
     void addPayment(String username, BigDecimal amount);
     Optional<List<User>> getBalance();
-    boolean isFriend(String fullName);
+    boolean userExists(String fullName);
     Optional<User> findByUsername(String username);
 }

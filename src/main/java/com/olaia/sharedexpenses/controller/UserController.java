@@ -18,6 +18,10 @@ public class UserController {
 
     @PostMapping("/addFriend")
     public ResponseEntity addFriend(@RequestBody User friend) {
+        Optional<User> existingUser = userService.findByUsername(friend.getUsername());
+        if (existingUser.isPresent()){
+          friend.setBalance(existingUser.get().getBalance());
+        }
         userService.addUser(friend);
         return ResponseEntity.ok().build();
     }

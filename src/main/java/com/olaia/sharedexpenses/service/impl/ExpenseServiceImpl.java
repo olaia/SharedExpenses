@@ -38,7 +38,7 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public void addExpense(ExpenseDTO expenseDTO) {
         Expense expense = convertToEntity(expenseDTO);
-        if (!userService.isFriend(expense.getPayer().getUsername())) return;
+        if (!userService.userExists(expense.getPayer().getUsername())) return;
 
         expenseRepository.save(expense);
         userService.addPayment(expense.getPayer().getUsername(), expense.getAmount());
